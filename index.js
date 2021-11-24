@@ -51,26 +51,49 @@ const sources = [
         name: "NintendoEverything",
         address: "https://nintendoeverything.com/",
         base: ''
-    }
+    },
+    {
+        name: "Polygon",
+        address: "https://www.polygon.com/",
+        base: ''
+    },
+    {
+        name: "Gamespot",
+        address: "https://www.gamespot.com/",
+        base: 'https://www.gamespot.com'
+    },
+    {
+        name: "GeeksAndGamers",
+        address: "https://www.geeksandgamers.com/",
+        base: ''
+    },
+    {
+        name: "ign",
+        address: "https://www.ign.com/",
+        base: 'https://www.ign.com'
+    },
 ]
 
+
+
 //arrays
+const allArticles = [];
 const zeldaArticles = [];
 const marioArticles = [];
 const metroidArticles = [];
 
-//zelda articles
+//all articles
 sources.forEach(source => {
     axios.get(source.address)
         .then(response => {
             const html = response.data
             const $ = cheerio.load(html)
             
-            $('a:contains("Zelda"), a:contains("Ocarina of Time")', html).each(function (){
-                const text = $(this).text();
+            $('a:contains("Zelda"), a:contains("Ocarina of Time"), a:contains("Mario"), a:contains("Super Mario"), a:contains("Metroid"), a:contains("Samus")', html).each(function (){
+                const text = $(this).text().trim();
                 const url = $(this).attr('href');
                 
-                zeldaArticles.push({
+                allArticles.push({
                     text,
                     url: source.base + url,
                     source: source.name,
@@ -81,6 +104,26 @@ sources.forEach(source => {
 
         })
 })
+//zelda articles
+sources.forEach(source => {
+    axios.get(source.address)
+        .then(response => {
+            const html = response.data
+            const $ = cheerio.load(html)
+            
+            $('a:contains("Zelda"), a:contains("Ocarina of Time")', html).each(function (){
+                const text = $(this).text().trim();
+                const url = $(this).attr('href');
+                
+                zeldaArticles.push({
+                    text,
+                    url: source.base + url,
+                    source: source.name,
+                    link: source.address
+                })
+            })
+        })
+})
 //mario articles
 sources.forEach(source => {
     axios.get(source.address)
@@ -89,7 +132,7 @@ sources.forEach(source => {
             const $ = cheerio.load(html)
             
             $('a:contains("Mario"), a:contains("Super Mario")', html).each(function (){
-                const text = $(this).text();
+                const text = $(this).text().trim();
                 const url = $(this).attr('href');
                 
                 marioArticles.push({
@@ -111,7 +154,7 @@ sources.forEach(source => {
             const $ = cheerio.load(html)
             
             $('a:contains("Metroid"), a:contains("Samus")', html).each(function (){
-                const text = $(this).text();
+                const text = $(this).text().trim();
                 const url = $(this).attr('href');
                 
                 metroidArticles.push({
@@ -128,7 +171,7 @@ sources.forEach(source => {
 
 //paths
 app.get('/', (req, res) => {
-    res.json("Welcome to my new API")
+    res.json(allArticles)
 })
 
 app.get('/zelda', (req, res) => {
@@ -159,7 +202,7 @@ app.get("/zelda/:sourceId", (req, res) => {
             const specificArticles = []
 
             $('a:contains("Zelda"), a:contains("Ocarina of Time")', html).each(function () {
-                const text = $(this).text()
+                const text = $(this).text().trim
                 const url = $(this).attr('href')
                 specificArticles.push({
                     text,
@@ -185,7 +228,7 @@ app.get("/mario/:sourceId", (req, res) => {
             const specificArticles = []
 
             $('a:contains("Mario"), a:contains("Super Mario")', html).each(function () {
-                const text = $(this).text()
+                const text = $(this).text().trim()
                 const url = $(this).attr('href')
                 specificArticles.push({
                     text,
@@ -211,7 +254,7 @@ app.get("/metroid/:sourceId", (req, res) => {
             const specificArticles = []
 
             $('a:contains("Metroid"), a:contains("Samus")', html).each(function () {
-                const text = $(this).text()
+                const text = $(this).text().trim
                 const url = $(this).attr('href')
                 specificArticles.push({
                     text,
