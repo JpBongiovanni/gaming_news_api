@@ -16,7 +16,7 @@ const sources = [
     {
         name: "NintendoNews",
         address: 'https://nintendonews.com/',
-        base: ''
+        base: 'https://nintendonews.com/'
     },
 
     {
