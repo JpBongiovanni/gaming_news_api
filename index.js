@@ -74,7 +74,7 @@ const sources = [
     {
         name: "N4G",
         address: "https://n4g.com/",
-        base: ''
+        base: 'https://n4g.com'
     },
     {
         name: "PCGamer",
