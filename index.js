@@ -13,11 +13,11 @@ const sources = [
         base: 'https://nintendolife.com/'
     },
 
-    {
-        name: "NintendoNews",
-        address: 'https://nintendonews.com/',
-        base: 'https://nintendonews.com/'
-    },
+    // {
+    //     name: "NintendoNews",
+    //     address: 'https://nintendonews.com/',
+    //     base: 'https://nintendonews.com/'
+    // },
 
     {
         name: "MyNintendoNews",
