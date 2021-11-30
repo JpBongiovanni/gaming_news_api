@@ -10,7 +10,7 @@ const sources = [
     {
         name: "NintendoLife",
         address: 'https://www.nintendolife.com/',
-        base: 'https://nintendolife.com'
+        base: 'https://nintendolife.com/'
     },
 
     {
