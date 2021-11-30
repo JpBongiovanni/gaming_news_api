@@ -176,7 +176,7 @@ sources.forEach(source => {
             const html = response.data
             const $ = cheerio.load(html)
             
-            $('a:contains("Mario"), a:contains("Super Mario")', html).each(function (){
+            $('a:contains("Mario") a:not("Deals")', html).each(function (){
                 const text = $(this).text().trim();
                 const url = $(this).attr('href');
                 
