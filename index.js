@@ -1,9 +1,15 @@
 const PORT = process.env.PORT || 8000;
-const express = require('express');
-const axios = require('axios');
-const cheerio = require('cheerio');
+import express from 'express';
+import pkg from 'axios';
+import { load } from 'cheerio';
 
+const { get } = pkg;
 const app = express();
+
+//axios enables us to use crud operations on http data. promise based 
+//Cheerio is a jquery library that is fast and used for selecting dom elements, when we visit a port we can see what we define (json)
+//express listens out to our port so we we can "hear" what's going on and eventually port the whole scraper to Rapid API
+
 
 //sources
 const sources = [
@@ -39,7 +45,7 @@ const sources = [
     {
         name: "GameRant",
         address: "https://gamerant.com/",
-        base: ''
+        base: 'https://gamerant.com/'
     },
     {
         name: "NintendoEverything",
@@ -80,12 +86,7 @@ const sources = [
         name: "PCGamer",
         address: "https://www.pcgamer.com/",
         base: ''
-    },
-    {
-        name: "PCGamer",
-        address: "https://www.pcgamer.com/",
-        base: ''
-    },
+    }
     // {
     //     name: "neoseeker",
     //     address: "https://www.neoseeker.com/",
@@ -129,10 +130,10 @@ const leagueOfLegendsArticles = [];
 
 //all articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Zelda"), a:contains("Ocarina of Time"), a:contains("Mario"), a:contains("Super Mario"), a:contains("Metroid"), a:contains("Samus"), a:contains("Donkey Kong")', html).each(function (){
                 const text = $(this).text().trim();
@@ -151,10 +152,10 @@ sources.forEach(source => {
 })
 //zelda articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Zelda"), a:contains("Ocarina of Time")', html).each(function (){
                 const text = $(this).text().trim();
@@ -171,10 +172,10 @@ sources.forEach(source => {
 })
 //mario articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Mario"), a:contains("Super Mario")', html).each(function (){
                 const text = $(this).text().trim();
@@ -193,10 +194,10 @@ sources.forEach(source => {
 })
 //metroid articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Metroid"), a:contains("Samus")', html).each(function (){
                 const text = $(this).text().trim();
@@ -215,10 +216,10 @@ sources.forEach(source => {
 })
 //Donkey Kong articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Donkey Kong")', html).each(function (){
                 const text = $(this).text().trim();
@@ -237,10 +238,10 @@ sources.forEach(source => {
 })
 //Star Wars Articles
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Star Wars")', html).each(function (){
                 const text = $(this).text().trim();
@@ -259,10 +260,10 @@ sources.forEach(source => {
 })
 //Final Fantasy
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Final Fantasy")', html).each(function (){
                 const text = $(this).text().trim();
@@ -281,10 +282,10 @@ sources.forEach(source => {
 })
 //Assassin's Creed
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Assassin\'s Creed")', html).each(function (){
                 const text = $(this).text().trim();
@@ -303,10 +304,10 @@ sources.forEach(source => {
 })
 //Tetris
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Tetris")', html).each(function (){
                 const text = $(this).text().trim();
@@ -325,10 +326,10 @@ sources.forEach(source => {
 })
 //The Sims
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("The Sims")', html).each(function (){
                 const text = $(this).text().trim();
@@ -347,10 +348,10 @@ sources.forEach(source => {
 })
 //Grand Theft Auto
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Grand Theft Auto"), a:contains("GTA")', html).each(function (){
                 const text = $(this).text().trim();
@@ -369,10 +370,10 @@ sources.forEach(source => {
 })
 //Call of Duty
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Call of Duty")', html).each(function (){
                 const text = $(this).text().trim();
@@ -391,10 +392,10 @@ sources.forEach(source => {
 })
 //Pokemon
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Pokemon")', html).each(function (){
                 const text = $(this).text().trim();
@@ -413,10 +414,10 @@ sources.forEach(source => {
 })
 //Sonic the Hedgehog
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Sonic The Hedgehog"), a:contains("Sonic")', html).each(function (){
                 const text = $(this).text().trim();
@@ -435,10 +436,10 @@ sources.forEach(source => {
 })
 // //Mega Man
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Mega Man"), a:contains("Rock Man")', html).each(function (){
                 const text = $(this).text().trim();
@@ -457,10 +458,10 @@ sources.forEach(source => {
 })
 // //Hollow Knight
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Hollow Knight"), a:contains("Silk Song")', html).each(function (){
                 const text = $(this).text().trim();
@@ -479,10 +480,10 @@ sources.forEach(source => {
 })
 // //Resident Evil
 sources.forEach(source => {
-    axios.get(source.address)
+    get(source.address)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             
             $('a:contains("Resident Evil"), a:contains("Biohazard")', html).each(function (){
                 const text = $(this).text().trim();
@@ -580,10 +581,10 @@ app.get("/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('(a:contains("Zelda"), a:contains("Ocarina of Time"), a:contains("Mario"), a:contains("Super Mario"), a:contains("Metroid"), a:contains("Samus"), a:contains("Donkey Kong"), a:contains("Final Fantasy")', html).each(function () {
@@ -606,10 +607,10 @@ app.get("/zelda/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Zelda"), a:contains("Ocarina of Time")', html).each(function () {
@@ -631,10 +632,10 @@ app.get("/mario/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Mario"), a:contains("Super Mario")', html).each(function () {
@@ -657,10 +658,10 @@ app.get("/metroid/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Metroid"), a:contains("Samus")', html).each(function () {
@@ -682,10 +683,10 @@ app.get("/donkey_kong/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Donkey Kong")', html).each(function () {
@@ -707,10 +708,10 @@ app.get("/assassins_creed/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Assassin\'s Creed")', html).each(function () {
@@ -732,10 +733,10 @@ app.get("/tetris/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Tetris")', html).each(function () {
@@ -757,10 +758,10 @@ app.get("/the_sims/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("The Sims")', html).each(function () {
@@ -782,10 +783,10 @@ app.get("/grand_theft_auto/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Grand Theft Auto"), a:contains("GTA")', html).each(function () {
@@ -807,10 +808,10 @@ app.get("/call_of_duty/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Call of Duty")', html).each(function () {
@@ -832,10 +833,10 @@ app.get("/pokemon/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Pokemon")', html).each(function () {
@@ -857,10 +858,10 @@ app.get("/sonic_the_hedgehog/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Sonic The Hedgehog"), a:contains("Sonic")', html).each(function () {
@@ -882,10 +883,10 @@ app.get("/mega_man/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Mega Man"), a:contains("Rock Man")', html).each(function () {
@@ -907,10 +908,10 @@ app.get("/hollow_knight/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Hollow Knight"), a:contains("Silk Song")', html).each(function () {
@@ -932,10 +933,10 @@ app.get("/resident_evil/:sourceId", (req, res) => {
     const sourceAddress = sources.filter(source => source.name == sourceId)[0].address
     const sourceBase = sources.filter(source => source.name == sourceId)[0].base
 
-    axios.get(sourceAddress)
+    get(sourceAddress)
         .then(response => {
             const html = response.data
-            const $ = cheerio.load(html)
+            const $ = load(html)
             const specificArticles = []
 
             $('a:contains("Resident Evil"), a:contains("Biohazard")', html).each(function () {
