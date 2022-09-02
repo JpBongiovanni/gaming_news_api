@@ -9,6 +9,10 @@
   "scripts": {
     "start": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JpBongiovanni/gaming_news_api.git"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
